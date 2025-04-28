@@ -1,5 +1,6 @@
 const express = require('express');
 const todoRouter = require('./routes/todo');
+require('./db/mongo'); // Import the MongoDB connection
 const app = express();
 const PORT = 3000;
 
