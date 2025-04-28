@@ -42,10 +42,26 @@ async function pageTODO(page, limit) {
     return todo;
 }
 
+//signup function (account creation)
+async function signup(username, password){
+    const auth = await authModel.create({
+        username,
+        password
+    });
+    return auth;
+}
+
+//login function
+async function loginID(username,password){
+    const login = await authModel.find({username,password});
+    return login;
+}
 
 module.exports = {
     createTodo,
     deleteTodo,
     updateTodo,
-    pageTODO
+    pageTODO,
+    signup,
+    loginID
 };

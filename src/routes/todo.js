@@ -1,5 +1,5 @@
 const express = require('express');
-const { createTodo,deleteTodo,updateTodo,pageTODO } = require('../models/todo'); //importing createTodo function from models/todo.js
+const { createTodo,deleteTodo,updateTodo,pageTODO,signup,loginID } = require('../models/todo'); //importing createTodo function from models/todo.js
 const router = express.Router();
 
 router.post('/',async (req, res) => {
@@ -33,3 +33,26 @@ router.get('/page', async (req, res) => {
 });
 
 module.exports = router;
+
+
+//user authentication 
+router.post('/signup',async(req, res)=>{
+    const {username,password} = req.body;
+    // console.log({body: req.body});  //after JSON edit in Thunder
+    const todo =await signup(username,password);
+    res.send(todo);
+});
+
+
+
+router.post('/login',async(req, res)=>{
+    const {username,password} = req.body;
+    // console.log({body: req.body});  //after JSON edit in Thunder 
+    const login =await loginID(username,password);
+    if (login.length<=0){
+        res.json("invalid credentials");
+    }
+    else{
+        res.json("Good!!")
+    }
+});
